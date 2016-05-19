@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+    main:
+        image: "rzhilkib-z620.jaspersoft.com:5000/jasperreports-server:trunk-postgres9"
+
+    test_pass:
+        image: "postgres:9.3.11"
+        command: ["/bin/true"]
+        depends_on:
+            - main
+    test_fail:
+        image: "postgres:9.3.11"
+        command: ["/bin/false"]
+        depends_on:
+            - main
+
+    manager:
+        build: .
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+

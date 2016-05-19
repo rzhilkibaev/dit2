@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+project_name="abc"
+#project_name="$(uuidgen)"
+#abc
+echo "project-name: $project_name"
+if [ "$project_name" ]; then
+    project_name_arg="--project-name=$project_name"
+fi
+
+docker-compose "$project_name_arg" build && docker-compose "$project_name_arg" up
+docker-compose "$project_name_arg" stop
+docker-compose "$project_name_arg" rm -v -f
